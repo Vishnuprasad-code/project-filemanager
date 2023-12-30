@@ -5,7 +5,7 @@ export function FilePathSearchBar({ searchPath, isFetching, onSearch }) {
     const searchPathRef = useRef();
     return (
         <div id="search-bar">
-            <img src="folder-root-icon.png" alt="" id="root-folder-image" />
+            <img src="search-in-folder-svgrepo-com.svg" alt="" id="root-folder-image" />
             <input
                 ref={searchPathRef}
                 className="search-bar-input"

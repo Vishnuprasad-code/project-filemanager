@@ -54,7 +54,7 @@ function App() {
         <button className="credential-submit" type="submit">Connect</button>
       </form>
 
-      {credentails.bucket_name && <ListPanel bucketName={credentails.bucket_name} />}
+      <ListPanel bucketName={credentails.bucket_name} />
     </div>
   )
 }
