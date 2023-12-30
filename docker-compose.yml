@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  frontend:
+    build: frontend
+    working_dir: /app/frontend
+    volumes:
+      - ./frontend:/app/frontend
+    command: npm run dev
+    ports:
+      - "3000:3000"
+
+  backend:
+    build: backend
+    working_dir: /app/backend
+    volumes:
+      - ./backend:/app/backend
+    command: python -u app.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - frontend
