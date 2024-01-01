@@ -39,7 +39,7 @@ class S3Manager():
 #             print(file_paths)
             Key = content_dict.get('Key')
             Size = content_dict.get('Size')
-            LastModified = content_dict.get('LastModified')
+            lastModified = content_dict.get('LastModified')
 
             newKey = Key.replace(prefix, '')
             # print(newKey)
@@ -52,7 +52,7 @@ class S3Manager():
                         'type': "File",
                         'fileName': newKey,
                         'sizeInfo': {'size': Size, 'displaySize': self.format_bytes(Size)},
-                        'LastModified': LastModified.strftime('%d-%m-%YT%H:%M:%S')
+                        'lastModified': lastModified.strftime('%d-%m-%YT%H:%M:%S')
                     })
                 continue
 
@@ -65,7 +65,7 @@ class S3Manager():
                         'type': "Folder",
                         'fileName': newKey,
                         'sizeInfo': folder_name_size_map[newKey]['sizeInfo'],
-                        'LastModified': LastModified.strftime('%d-%m-%YT%H:%M:%S')
+                        'lastModified': lastModified.strftime('%d-%m-%YT%H:%M:%S')
                     }
                 )
             elif newKey.endswith('/'):
@@ -89,14 +89,14 @@ class S3Manager():
                 folder_name_size_map[
                             folder_name
                         ]['sizeInfo']['displaySize'] = self.format_bytes(size)
-                
+
                 if need_to_append:
                     file_paths.append(
                         {
                             'type': "Folder",
                             'fileName': folder_name,
                             'sizeInfo': folder_name_size_map[folder_name]['sizeInfo'],
-                            'LastModified': LastModified.strftime('%d-%m-%YT%H:%M:%S')
+                            'lastModified': lastModified.strftime('%d-%m-%YT%H:%M:%S')
                         }
                     )
 
@@ -132,6 +132,12 @@ class S3Manager():
             response['url'] = None
 
         return response
+
+    def upload_file_s3(self, bucket_name, file_name, object_name):
+        try:
+            self.s3_client.upload_file(file_name, bucket_name, object_name)
+        except ClientError:
+            pass
 
     @staticmethod
     def format_bytes(size):

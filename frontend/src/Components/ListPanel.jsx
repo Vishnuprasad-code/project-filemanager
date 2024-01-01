@@ -34,8 +34,7 @@ export function ListPanel({ bucketName }) {
     return (
         <>
         <FilePathSearchBar
-            searchPath={searchPath}
-            setSearchPath={setSearchPath}
+            onSearch={handleSearchPathClick}
             isFetching={isFetching}
         />
         <FileListings

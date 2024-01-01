@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 
 
-export function FilePathSearchBar({ searchPath, isFetching, onSearch }) {
+export function FilePathSearchBar({ isFetching, onSearch }) {
     const searchPathRef = useRef();
     return (
         <div id="search-bar">
@@ -11,7 +11,6 @@ export function FilePathSearchBar({ searchPath, isFetching, onSearch }) {
                 className="search-bar-input"
                 type="text"
                 name="searh_path"
-                value={searchPath}
             />
             <button
                 className="search-go-btn"

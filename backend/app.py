@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request
 from traceback import format_exc
 from werkzeug import utils, datastructures
@@ -37,6 +39,10 @@ s3_upload_parser.add_argument(
     'bucket_name',
     required=True,
     location='form')
+s3_upload_parser.add_argument(
+    'upload_path',
+    required=True,
+    location='form')
 
 # TodoList
 # shows a list of all todos, and lets you POST to add new tasks
@@ -62,7 +68,7 @@ class S3Download(Resource):
         return {"data": response}, 200
 
 
-class s3FileUpload(Resource):   
+class s3FileUpload(Resource):
     def post(self):
         # file = request.files["file"]
         # filename = secure_filename(file.filename)
@@ -71,7 +77,14 @@ class s3FileUpload(Resource):
         args = s3_upload_parser.parse_args()
         filename = utils.secure_filename(args['file_to_upload'].filename)
         args['file_to_upload'].save(filename)
-
+        bucket_name = args['bucket_name']
+        upload_path = args['upload_path']
+        s3_manager.upload_file_s3(
+            bucket_name,
+            filename,
+            upload_path
+        )
+        os.remove(filename)
         return {"data": 'Success'}, 200
 
 ##

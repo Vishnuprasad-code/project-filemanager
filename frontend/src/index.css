@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  height: 100vh;
+  /* height: 100%; */
 }
 
 input:focus,
@@ -16,7 +16,7 @@ button:focus {
 #container {
   margin: 2% auto;
   width: 90%;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .credential-form {
@@ -169,4 +169,97 @@ button:focus {
 
 .listing-cell-download:hover {
   cursor: grab;
+}
+
+.overlay {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  inset: 0;
+  position: fixed;
+  background-color: rgba(97, 91, 91, 0.5);
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-popup {
+  background-color: rgb(201, 179, 179);
+  border: 3px solid rgb(121, 119, 119);
+  box-shadow: 0 4px 2px -2px grey;
+  border-radius: 15px;
+  height: 100px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  /* gap: 5px; */
+}
+
+.close-btn {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border-radius: 50%;
+  background-color: black;
+  opacity: 0.8;
+  transition: 0.3s ease-out;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background-color: red;
+    left: 50%;
+    top: 50%;
+  }
+  &:after {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &:before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  &:hover,
+  &:focus {
+    background-color: white;
+    opacity: 1;
+  }
+}
+
+
+.upload-popup h3{
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  flex-basis: 100%;
+  align-self: center;
+  border-bottom: 1px solid gray;
+  text-align: center;
+}
+
+
+.upload-popup p{
+  flex-grow: 1;
+  flex-basis: 100%;
+  align-self: center;
+  /* border: 1px solid green; */
+  text-align: center;
+}
+
+
+.upload-popup-btn{
+  margin-right: 25px;
+  height: 25px;
+  width: 100px;
+  align-self: flex-end;
 }
